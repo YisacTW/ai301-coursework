@@ -49,4 +49,4 @@ The availability rule can reject an issue that otherwise looks approachable, esp
 
 ## Selection rationale
 
-Issue #73 fits a short first contribution because the work is small, specific, and easy to verify. The task is to bring the README, the example environment file, and the configuration behavior into agreement about the required API key. I can work through that without needing to redesign a feature or understand the entire application. The one-to-two-hour estimate also makes the issue practical to claim and finish in a focused session.
+I have some coding experience, but I wanted a first contribution that I could realistically finish in about two hours. Issue #73 fits because it has a clear, limited goal: make the README, the example environment file, and the configuration behavior agree about the required API key. The files are already named and the result is easy to check, so I can focus on learning the project’s contribution workflow without having to redesign a larger feature.
