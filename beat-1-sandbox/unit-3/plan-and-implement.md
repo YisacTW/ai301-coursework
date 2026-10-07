@@ -19,19 +19,15 @@ YisacTW
 
 **Plan comment**
 
-[Posted plan comment](https://github.com/codepath/pathreview-ai301-fa26-s1/issues/73#issuecomment-6028789181)
+[Posted Section 3 plan comment](https://github.com/codepath/pathreview-ai301-fa26-s3/issues/73#issuecomment-6028955483)
 
-> Based on my reproduction, the mismatch is in the example environment
-> file: the README asks a new contributor to add `OPENROUTER_API_KEY`,
-> but `.env.example` does not include a place to set it. My plan is to
-> update only the LLM section of `.env.example` so it names `openrouter`
-> as an option and includes an empty `OPENROUTER_API_KEY` entry.
->
-> I am leaving `core/config.py`, provider behavior, and other setup docs
-> out of this change because my reproduction did not establish a runtime
-> problem or show which provider behavior should change. I will verify
-> the edit by copying `.env.example` to a temporary `.env` and confirming
-> that the copied file contains the key named in the README.
+> The reproduction shows a narrow setup-file mismatch: `README.md` asks
+> for `OPENROUTER_API_KEY`, while `.env.example` has no entry for it. The
+> plan changes only `.env.example` by adding `OPENROUTER_API_KEY=` under
+> the OpenAI placeholder. It keeps the existing provider-options comment
+> because the reproduction does not establish that `openrouter` is a
+> supported provider value. Verification copies the example to a
+> temporary `.env`, checks for the key, and runs a whitespace check.
 
 ---
 
@@ -52,6 +48,7 @@ Select-String -Path .env -Pattern 'OPENROUTER_API_KEY|OPENAI_API_KEY|LLM_PROVIDE
 ```
 
 ```text
+Repository: codepath/pathreview-ai301-fa26-s3 (baseline commit 2f4e82f)
 README.md:24: # Configure environment (add your OPENROUTER_API_KEY to .env)
 .env.example:18: LLM_PROVIDER=mock
 .env.example:19: OPENAI_API_KEY=sk-your-key-here

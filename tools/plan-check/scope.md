@@ -17,7 +17,7 @@ ships.
 Only issues in the course's Path Review repository are in scope this
 week:
 
-- Repo: `codepath/pathreview-ai301-fa26-s1`
+- Repo: `codepath/pathreview-ai301-fa26-s3`
 
 The repo line above ships as a bracketed placeholder; replacing it is
 step 1 of this unit's assignment. If you do not know your section's
