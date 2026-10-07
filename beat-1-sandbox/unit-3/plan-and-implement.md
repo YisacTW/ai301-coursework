@@ -15,17 +15,12 @@ label is not graded.
 
 **GitHub username**
 
-[Your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comment upstream is identified by this name, and it is
-the only thing that ties it to you. Several students may plan the same
-house issue, so this is what keeps their comments off your score and
-yours off theirs.]
+YisacTW
 
 **Plan comment**
 
-[Link to the comment where you posted your plan on the issue. Use the comment's own
-permalink. **Then paste the text of that comment underneath the link** — the pasted text is
-what this field is graded on, so copy across what you actually posted.]
+Pending the public post. The prepared comment is the same plan in
+`plan.md`, summarized for the issue thread.
 
 ---
 
@@ -33,15 +28,53 @@ what this field is graded on, so copy across what you actually posted.]
 
 **Branch**
 
-[The name of the branch you built the change on, exactly as it appears in your fork. The
-naming shape is a type prefix, then the issue number, then a short description. **The issue
-number in the branch name must be the number of the issue you claimed** — a name carrying
-any other number does not satisfy this field.]
+fix/73-env-docs
 
 **Evidence**
 
-[Your Unit 2 reproduction steps re-run against the built change: the before, then the
-after. Paste both, including the commands you ran and their output.]
+**Before the change**
+
+```powershell
+Select-String -Path README.md,'.env.example','core/config.py' -Pattern 'OPENROUTER_API_KEY|OPENAI_API_KEY|LLM_PROVIDER'
+Copy-Item .env.example .env
+Select-String -Path .env -Pattern 'OPENROUTER_API_KEY|OPENAI_API_KEY|LLM_PROVIDER'
+```
+
+```text
+README.md:24: # Configure environment (add your OPENROUTER_API_KEY to .env)
+.env.example:18: LLM_PROVIDER=mock
+.env.example:19: OPENAI_API_KEY=sk-your-key-here
+core/config.py:18: llm_provider: str = Field(default="mock")
+core/config.py:19: openai_api_key: str = Field(default="")
+core/config.py:20: openrouter_api_key: str = Field(default="")
+.env:18: LLM_PROVIDER=mock
+.env:19: OPENAI_API_KEY=sk-your-key-here
+```
+
+**After the change**
+
+```powershell
+Select-String -Path README.md,'.env.example','core/config.py' -Pattern 'OPENROUTER_API_KEY|OPENAI_API_KEY|LLM_PROVIDER'
+Copy-Item .env.example .env
+Select-String -Path .env -Pattern 'OPENROUTER_API_KEY|OPENAI_API_KEY|LLM_PROVIDER'
+Remove-Item -LiteralPath .env
+```
+
+```text
+README.md:24: # Configure environment (add your OPENROUTER_API_KEY to .env)
+.env.example:18: LLM_PROVIDER=mock
+.env.example:19: OPENAI_API_KEY=sk-your-key-here
+.env.example:20: OPENROUTER_API_KEY=
+core/config.py:18: llm_provider: str = Field(default="mock")
+core/config.py:19: openai_api_key: str = Field(default="")
+core/config.py:20: openrouter_api_key: str = Field(default="")
+.env:18: LLM_PROVIDER=mock
+.env:19: OPENAI_API_KEY=sk-your-key-here
+.env:20: OPENROUTER_API_KEY=
+```
+
+The second run shows that the file contributors copy now contains the
+same OpenRouter key named by the README. `git diff --check` also passed.
 
 ## Eval iterations
 
@@ -50,28 +83,43 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+My first three-package calibration rejected `pkg-02` because my
+`bounded-change` check was treating directly related sibling guards
+and regression coverage as scope creep. I changed that check from
+requiring “one focused change” to allowing “directly related guards,
+sibling sites, or regression coverage needed to prevent the same
+failure.” The final harness run reported: `agreement: 19/20 scored
+items  (bar: 18/20: PASS)` and `run written to eval-run.txt`.
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+The final run disagreed only on `pkg-14`: the gold verdict was
+`accept`, while my tool returned `reject` after marking
+`diagnosis-grounded` and `honest-unknowns` as failed. The other
+clear-accept packages were mostly correct: `clear-accept 6/7`. Every
+reject-family category was fully correct: `scope-creep 4/4`,
+`thread-convention 2/2`, `unbuildable 3/3`, and `wrong-cause 4/4`.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/plan-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+I kept the diagnosis rule strict because it checks whether “the stated
+cause explains the reproduced behavior without contradicting it or
+claiming more than the evidence proves.” I narrowed the scope rule so
+it allows necessary safeguards and tests but still excludes “unrelated
+redesigns, broad refactors, and unverified work.” I also required a
+verification result that “would distinguish a fixed state from the
+reproduced failure,” so a plan cannot pass just by promising a vague
+test.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+The trade-off is caution versus flexibility. The rules reliably caught
+the bad-plan families, but the final run held one staff-approved plan
+because it did not give enough confidence in its diagnosis and
+unknowns. I kept that conservative standard because a plan with an
+unsupported cause can lead to the wrong change. The bounded-change
+revision avoids the opposite mistake: rejecting a small, necessary
+regression test or a directly related guard as if it were a redesign.
 
 ---
 
