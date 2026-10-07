@@ -19,8 +19,19 @@ YisacTW
 
 **Plan comment**
 
-Pending the public post. The prepared comment is the same plan in
-`plan.md`, summarized for the issue thread.
+[Posted plan comment](https://github.com/codepath/pathreview-ai301-fa26-s1/issues/73#issuecomment-6028789181)
+
+> Based on my reproduction, the mismatch is in the example environment
+> file: the README asks a new contributor to add `OPENROUTER_API_KEY`,
+> but `.env.example` does not include a place to set it. My plan is to
+> update only the LLM section of `.env.example` so it names `openrouter`
+> as an option and includes an empty `OPENROUTER_API_KEY` entry.
+>
+> I am leaving `core/config.py`, provider behavior, and other setup docs
+> out of this change because my reproduction did not establish a runtime
+> problem or show which provider behavior should change. I will verify
+> the edit by copying `.env.example` to a temporary `.env` and confirming
+> that the copied file contains the key named in the README.
 
 ---
 
