@@ -55,10 +55,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Built an issue scout for small Python bugs and documentation work**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+I installed the issue-scout over my earlier issue-selection tool, kept my existing rubric, and wrote searches based on the kind of Python work I can realistically finish in focused sessions. My first scan surfaced a few recent feature requests that did not match that goal, so I updated the ranking rules to keep only bug and documentation-labelled results before grading the top five. The revised scan produced two plausible examples and showed that missing contribution-policy evidence should stay a required blocker instead of something the tool assumes away.
 
 **Unit 6: [one line on the tool work]**
 
