@@ -11,7 +11,7 @@ files and no evidence uploads are part of Assignment 5.
 **Student:** Isaac Tsegaye Wanna
 **GitHub Username:** YisacTW
 **Issue:** https://github.com/ESCOMP/CTSM/issues/3152
-**Pull Request:** [GitHub PR link, once opened]
+**Pull Request:** https://github.com/ESCOMP/CTSM/pull/4295
 
 One repository, built across units 5 to 8, telling the whole story of your real
 contribution. Fill it as you work, not at the end — the sections below ask for evidence that
@@ -68,7 +68,7 @@ I installed the ship-gate and wrote a local manifest for the CTSM documentation 
 
 **Unit 8: Installed the PR monitor and wrote a response playbook**
 
-I installed the PR monitor and wrote a short playbook for review replies, follow-up timing, and when to step away from a contribution. The CTSM branch is ready, but no pull request has been opened yet, so I have not run the monitor against invented PR state. Once the pull request exists, I will run the monitor once, record the actual review state, and decide whether a follow-up is appropriate from the playbook.
+I installed the PR monitor and wrote a short playbook for review replies, follow-up timing, and when to step away from a contribution. Pull request #4295 is now open and waiting for its first maintainer review. The monitor's local prerequisite, GitHub CLI, is not available on this computer; its installer did not finish, so I did not claim a monitor run that could not occur. I checked the live PR directly instead and recorded its current state. When the CLI is available, the next step is one monitor run against this branch, followed by a decision based on the playbook rather than an automatic nudge.
 
 ---
 
@@ -217,22 +217,22 @@ The first ship-gate run stopped because the edits were not committed; after comm
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** https://github.com/ESCOMP/CTSM/pull/4295
 
 **PR Description:** The draft explains that the change adds the existing local navigation pattern to two pages, keeps the table at depth one, and leaves wording and code untouched. It records the direct Sphinx evidence, the clean whitespace check, and the local GNU Make limitation.
 
 **Maintainer Feedback:**
 
-- 2026-11-03: No pull request has been opened yet, so there is no maintainer feedback.
+- 2026-11-03: No maintainer feedback yet. The PR is open and GitHub shows that an approving review is required before it can merge.
 
-**Status:** Branch ready; PR not yet opened. The safety gate accepted the branch and draft.
+**Status:** Awaiting review. Pull request #4295 is open from `YisacTW:docs/add-local-tables-of-contents` to `ESCOMP:master`.
 
 **Toolkit**
 
-- Tool: pr-precheck and ship-gate
-- What it produced: an accept verdict for the branch and PR draft
-- Difficulties: the initial draft said `Fixes #3152`, which was too broad for a focused two-page change
-- What changed: I revised the wording to `Refs #3152` and reran the gate successfully
+- Tool: pr-precheck, ship-gate, and the PR-monitor playbook
+- What it produced: an accept verdict for the branch and PR draft, plus a live PR awaiting review
+- Difficulties: the initial draft said `Fixes #3152`, which was too broad for a focused two-page change; GitHub CLI is also unavailable, so the monitor cannot make its read-only run yet
+- What changed: I revised the wording to `Refs #3152`, reran the gate successfully, and recorded the monitor limitation rather than inventing a report
 
 ---
 
